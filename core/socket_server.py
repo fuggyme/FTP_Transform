@@ -52,6 +52,7 @@ class MyTCPServer(socketserver.BaseRequestHandler):
         filename = cmd.split()[1]
         fileName = filename.split("\\")[-1]  # 文件的名称
         home_file = os.path.join(self.current_path, fileName)    # 判断当前路径下是否有上传的文件名
+        print("文件上传路径：", self.current_path)
         self.request.send("000".encode())  # 系统交互码
         total_size = self.request.recv(1024).decode()  # 上传文件大小
         remain_size = self.accountRemainSize()  # 获得账户剩余大小
