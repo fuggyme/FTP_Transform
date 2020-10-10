@@ -35,7 +35,7 @@ class Breakpoint(object):
         process = has_send_size / total_size
         send_bar = int(process * bar_width + 0.5)     # 发送的数据占到的进度条长度，四舍五入取整
         sys.stdout.write("#" * send_bar + "=" * (bar_width - send_bar) + "\r")  # 注意点：只能这么写才能达到要求
-        sys.stdout.write("\r\n%.2f%%: %s%s" % (process * 100, "#" * send_bar, "=" * (bar_width - send_bar)))  # 注意点：在pycharm中要加\r\n
+        sys.stdout.write("\r%.2f%%: %s%s" % (process * 100, "#" * send_bar, "=" * (bar_width - send_bar)))  # 注意点：在pycharm中要加\r\n
                                                                        # 用sublime只要\r否则换行
         sys.stdout.flush()
 
