@@ -75,6 +75,7 @@ class MySocketClient(object):
         if len(lst) == 2:
             filename = lst[1]
             self.default_file = os.path.join(settings.DEFAULT_PATH_UPLOAD, filename)
+            print("上传文件详细路径：", self.default_file)
             if os.path.isfile(self.default_file):
                 self.client.send(cmd.encode())   # 向服务端发送上传文件命令
                 status_code = self.client.recv(1024).decode()
