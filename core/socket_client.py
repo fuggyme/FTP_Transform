@@ -75,6 +75,7 @@ class MySocketClient(object):
         if len(lst) == 2:
             filename = lst[1]
             self.default_file = os.path.join(settings.DEFAULT_PATH_UPLOAD, filename)
+            print("上传文件详细路径：", self.default_file)
             if os.path.isfile(self.default_file):
                 self.client.send(cmd.encode())   # 向服务端发送上传文件命令
                 status_code = self.client.recv(1024).decode()
@@ -106,11 +107,11 @@ class MySocketClient(object):
                             print("输入的命令不存在")
                             continue
                 elif status_code == "402":
-                    print("文件不存在")   # 文件不存在
+                    print("所选上传文件不在服务器中，即将开始上传......")   # 文件不存在
                     send_md5 = upload.Breakpoint().transfer(self.default_file, 0, total_size, self.client)  # 进行文件的传输返回此次发送数据的md5
                     recv_md5 = self.client.recv(1024).decode()  # 服务端接收到此次发送数据的md5
-                    print("\nsend md5", send_md5)
-                    print("recv md5", recv_md5)
+                    #print("\nsend md5", send_md5)
+                    #print("recv md5", recv_md5)
                     if send_md5 == recv_md5:
                         print("发送数据成功")
                     else:
